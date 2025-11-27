@@ -60,6 +60,4 @@ You need to [import]( https://docs.github.com/en/get-started/importing-your-proj
 
 **Do not make any changes to your repo after the end of the exam.**
 
-**You may not be able to copy and paste into the text area for answering this exam, but you can add attachments (up to two). Therefore, add your name, code, and a link to your exam repo within this attachment (.txt).**
-
 **Note:** if we observe **suspicious behavior**, the student involved will be called for an interview. Examples of suspicious behavior can be, all the commits happening at the end of the exam or with a non-realistic timeline, too many similarities between projects, etc.
