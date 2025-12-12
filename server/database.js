@@ -20,36 +20,34 @@ const execute = async(createTblQuery, insertDataQuery) => {
 };
 
 const createTblQuery = ` 
-    CREATE TABLE IF NOT EXISTS "wadcourse" (
-        "id" SERIAL PRIMARY KEY, 
-        "studentcode" VARCHAR(200) NOT NULL,
-        "studentlevel" VARCHAR(200) NOT NULL,
-        "hws" integer,
-        "exam" integer,
-        "examfeedback" VARCHAR(200) NOT NULL, 
-        "final" integer
+    CREATE TABLE IF NOT EXISTS "routes" (
+        "id" SERIAL PRIMARY KEY,  
+        "fromcity" VARCHAR(200) NOT NULL,
+        "tocity" VARCHAR(200) NOT NULL,  
+        "cost" integer NOT NULL, 
+        "departuretime" VARCHAR(200) NOT NULL,
+        "departuredate" VARCHAR(200) NOT NULL
         );`;
 
-const insertDataQuery = `WITH data (studentcode, studentlevel, hws, exam, examfeedback, final) AS 
+const insertDataQuery = `WITH data (fromcity, tocity, cost, departuretime, departuredate) AS 
     (
     VALUES
-        ('C001', 'BA',  20, 40, '-30 in HWs and -10 in exam', 60),
-        ('C002', 'MA',  22, 45, '-28 in HWs and  -5 in exam', 77),
-        ('B001', 'BA',  12, 15, '-38 in HWs and -35 in exam', 27),
-        ('C003', 'PHD', 50, 50, ' -0 in HWs and  -0 in exam', 100),
-        ('B002', 'BA',  22, 18, '-28 in HWs and -32 in exam', 40)
+    ('Tartu', 'Tallinn', 14, '06:00:00', '2022-03-24'),  
+    ('Tartu', 'Tallinn', 14, '08:00:00', '2022-03-24'),
+    ('Tartu', 'Parnu ', 11, '10:00:00', '2022-03-24'),
+    ('Tartu', 'Narva', 15, '10:30:00', '2022-03-24'),
+    ('Tartu', 'Tallinn', 12, '11:00:00', '2022-03-24'), 
+    ('Tartu', 'Parnu', 12, '12:00:00', '2022-03-24')
     )
-
-    
-    INSERT INTO wadcourse(studentcode, studentlevel, hws, exam, examfeedback, final) 
-    SELECT  d.studentcode, d.studentlevel, d.hws,  d.exam, d.examfeedback, d.final
+    INSERT INTO routes(fromcity, tocity, cost, departuretime, departuredate) 
+    SELECT  d.fromcity, d.tocity, d.cost, d.departuretime, d.departuredate
     FROM data d
-    WHERE NOT EXISTS (SELECT * FROM wadcourse WHERE id = 1);
+    WHERE NOT EXISTS (SELECT * FROM routes WHERE id = 1);
 `
 
 execute(createTblQuery, insertDataQuery).then(result => {
     if (result) {
-        console.log('If it does not exists, table "wadcourse" is created');
+        console.log('If does not exists, table "routes" is created');
     }
 });
 
